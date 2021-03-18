@@ -1,0 +1,48 @@
+---------------------------------------
+-- FSM 4: A sequential comparator circuit FSM
+---------------------------------------
+-- Author: John Erskine 40257184
+-- email:  jerskine07@qub.ac.uk
+---------------------------------------
+--Testbench
+---------------------------------------
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+
+--this is how entity for your test bench code has to be declared.
+entity testbench is
+end testbench;
+
+architecture behavior of testbench is
+--signal declarations.
+signal A,B : std_logic_vector(3 downto 0) := (others => '0');
+signal AlessB, AequalB, AgreaterB : std_logic := '0';
+
+begin
+--entity instantiation
+  UUT : entity work.compare port map(A,B,AlessB,AequalB,AgreaterB);
+
+
+  --definition of simulation process
+  tb : process
+  begin
+    A<="0010";  --A = 2
+    B<="1001"; --B = 9
+    wait for 1 ns;
+
+    A<="1001";  --A = 9
+    B<="0010";   --B = 2
+    wait for 1 ns;
+
+    A<="1010";  --A = 10
+    B<="1010";  --B = 10
+    
+    --more input combinations can be given here.
+    
+    wait for 1 ns;
+
+    wait;
+  end process tb;
+
+end;
