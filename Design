@@ -1,0 +1,47 @@
+---------------------------------------
+-- FSM 4: A sequential comparator circuit FSM
+---------------------------------------
+-- Author: John Erskine 40257184
+-- email:  jerskine07@qub.ac.uk
+---------------------------------------
+--Design
+---------------------------------------
+--libraries to be used are specified here
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+--entity declaration with port definitions
+entity compare is
+  port(A : in std_logic_vector(3 downto 0);  --input 1
+       B : in std_logic_vector(3 downto 0);  --input 2
+       AlessB : out std_logic;   -- indicates first number is smaller
+       AequalB : out std_logic;   -- both are equal
+       AgreaterB : out std_logic);    -- indicates first number is bigger
+
+end compare;
+
+--architecture of entity
+architecture Behavioral of compare is
+
+begin
+process(A,B)
+begin    -- process starts with a 'begin' statement
+  if (A > B ) then  --checking whether A is greater than B
+    AlessB <= '0';
+    AequalB <= '0';
+    AgreaterB <= '1';
+
+  elsif (A < B) then    --checking whether A is less than B
+    AlessB <= '1';
+    AequalB <= '0';
+    AgreaterB <= '0';
+
+  else     --checking whether A is equal to B
+    AlessB <= '0';
+    AequalB <= '1';
+    AgreaterB <= '0';
+
+  end if;
+end process;   -- process ends with a 'end process' statement
+
+end Behavioral;
